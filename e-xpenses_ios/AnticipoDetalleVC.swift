@@ -31,6 +31,13 @@ class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate
             labelHora.text = hora
         }
         
+        //iniciar lector QR
+        initLectorQr();
+        
+        
+    }
+    
+    func initLectorQr(){
         view.backgroundColor = UIColor.blackColor()
         captureSession = AVCaptureSession()
         
@@ -69,7 +76,6 @@ class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate
         
         captureSession.startRunning();
 
-        
     }
 
     override func didReceiveMemoryWarning() {

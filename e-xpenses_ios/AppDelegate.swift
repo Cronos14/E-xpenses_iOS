@@ -14,29 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSXMLParserDelegate{
 
     var window: UIWindow?
     
-    var options:[NSObject : AnyObject]?
     
     var nodos = [NodoXml]()
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        
-        
-        if let options = launchOptions {
-            print("didFinishLaunchingWithOptions con datos");
-
-            self.options = options;
-            return true
-            
-        }else{
-            print("didFinishLaunchingWithOptions sin datos");
-            return false
-
-        }
-        
-    }
-
+   
     func applicationWillResignActive(application: UIApplication) {
         print("applicationWillResignActive")
     }
@@ -49,37 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSXMLParserDelegate{
        print("applicationWillEnterForeground")
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
-        
-        print("ApplicationDidBecomeActive")
-        
-        
-        if let file = options?[UIApplicationLaunchOptionsURLKey]{
-            
-            
-            //let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file as! String)
-            //let text2 = try NSString(contentsOfURL: file as! NSURL, encoding: NSUTF8StringEncoding)
-    
-            saveNodos(file as! NSURL)
-           
-                    
-            //cambiar de UIViewController
-            let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewControlleripad : FacturaViewController = mainStoryboardIpad.instantiateViewControllerWithIdentifier("factura") as! FacturaViewController
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            initialViewControlleripad.nodos = nodos
-            self.window?.rootViewController = initialViewControlleripad
-            self.window?.makeKeyAndVisible()
-            
-            //cambiar a pushViewController
-            //let rootViewController = self.window!.rootViewController as! UINavigationController
-            //rootViewController.pushViewController(initialViewControlleripad, animated: true)
-
-            
-              
-        }
-        
-    }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         print("didReceiveRemoteNotification")
@@ -199,7 +150,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSXMLParserDelegate{
         
     }
     
+    //MARK: -AirDrop
     
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        
+        
+        //let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file as! String)
+        let facturaCompleta = try? NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding)
+        
+        saveNodos(url)
+        
+        
+        //cambiar de UIViewController
+        let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewControlleripad : FacturaViewController = mainStoryboardIpad.instantiateViewControllerWithIdentifier("factura") as! FacturaViewController
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        initialViewControlleripad.nodos = nodos
+        initialViewControlleripad.facturaCompleta = facturaCompleta as! String
+        self.window?.rootViewController = initialViewControlleripad
+        self.window?.makeKeyAndVisible()
+        
+        //cambiar a pushViewController
+        //let rootViewController = self.window!.rootViewController as! UINavigationController
+        //rootViewController.pushViewController(initialViewControlleripad, animated: true)
+        
+        
+
+
+        return true
+
+    }
+    
+   
     
 }
 
