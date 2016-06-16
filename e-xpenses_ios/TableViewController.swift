@@ -110,7 +110,7 @@ class TableViewController: UITableViewController {
         anticipo.estatus = estatus[tableView.indexPathForSelectedRow!.row]
         anticipo.fecha = fechas[tableView.indexPathForSelectedRow!.row]
         anticipo.hora = horas[tableView.indexPathForSelectedRow!.row]
-        destination.anticipo = anticipo
+        //destination.anticipo = anticipo
     }
  
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210E5A751D0F128C00286154 /* FacturaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E5A741D0F128C00286154 /* FacturaCell.swift */; };
+		210E5A771D0F150800286154 /* Factura.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210E5A761D0F150800286154 /* Factura.swift */; };
 		212AD72B1CD67A5E005C7605 /* MenuLateralVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212AD72A1CD67A5E005C7605 /* MenuLateralVC.swift */; };
 		2149AAEE1CD33F6900E15161 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149AAED1CD33F6900E15161 /* AppDelegate.swift */; };
 		2149AAF01CD33F6900E15161 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149AAEF1CD33F6900E15161 /* ViewController.swift */; };
@@ -17,14 +19,17 @@
 		2149AB071CD3D8C100E15161 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2149AB061CD3D8C100E15161 /* SWRevealViewController.m */; };
 		2149AB091CD3DB4700E15161 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149AB081CD3DB4700E15161 /* TableViewController.swift */; };
 		2149AB0D1CD3FD4C00E15161 /* AnticiposCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2149AB0C1CD3FD4C00E15161 /* AnticiposCell.swift */; };
-		217C1D3E1D06BB9500721E5A /* FacturaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217C1D3D1D06BB9500721E5A /* FacturaViewController.swift */; };
 		21CD95101D06400900670AB9 /* NodoXml.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD950F1D06400900670AB9 /* NodoXml.swift */; };
 		21D82FB61CD7B10D00ABB63E /* AnticipoDetalleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D82FB51CD7B10D00ABB63E /* AnticipoDetalleVC.swift */; };
 		21D82FB81CD7BAC800ABB63E /* Seccion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D82FB71CD7BAC800ABB63E /* Seccion.swift */; };
 		21D82FBD1CD7C28A00ABB63E /* Anticipo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D82FBC1CD7C28A00ABB63E /* Anticipo.swift */; };
+		21E9211B1D0CA1420059604D /* FacturaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E9211A1D0CA1420059604D /* FacturaVC.swift */; };
+		21FC8CDC1D11F5470087AFC0 /* EmpresaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC8CDB1D11F5470087AFC0 /* EmpresaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		210E5A741D0F128C00286154 /* FacturaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacturaCell.swift; sourceTree = "<group>"; };
+		210E5A761D0F150800286154 /* Factura.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factura.swift; sourceTree = "<group>"; };
 		212AD72A1CD67A5E005C7605 /* MenuLateralVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuLateralVC.swift; sourceTree = "<group>"; };
 		2149AAEA1CD33F6900E15161 /* e-xpenses_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-xpenses_ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2149AAED1CD33F6900E15161 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,11 +44,12 @@
 		2149AB061CD3D8C100E15161 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		2149AB081CD3DB4700E15161 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		2149AB0C1CD3FD4C00E15161 /* AnticiposCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnticiposCell.swift; sourceTree = "<group>"; };
-		217C1D3D1D06BB9500721E5A /* FacturaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacturaViewController.swift; sourceTree = "<group>"; };
 		21CD950F1D06400900670AB9 /* NodoXml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodoXml.swift; sourceTree = "<group>"; };
 		21D82FB51CD7B10D00ABB63E /* AnticipoDetalleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnticipoDetalleVC.swift; sourceTree = "<group>"; };
 		21D82FB71CD7BAC800ABB63E /* Seccion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seccion.swift; sourceTree = "<group>"; };
 		21D82FBC1CD7C28A00ABB63E /* Anticipo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anticipo.swift; sourceTree = "<group>"; };
+		21E9211A1D0CA1420059604D /* FacturaVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacturaVC.swift; sourceTree = "<group>"; };
+		21FC8CDB1D11F5470087AFC0 /* EmpresaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpresaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +105,9 @@
 				21D82FB51CD7B10D00ABB63E /* AnticipoDetalleVC.swift */,
 				2149AB0C1CD3FD4C00E15161 /* AnticiposCell.swift */,
 				212AD72A1CD67A5E005C7605 /* MenuLateralVC.swift */,
-				217C1D3D1D06BB9500721E5A /* FacturaViewController.swift */,
+				21E9211A1D0CA1420059604D /* FacturaVC.swift */,
+				210E5A741D0F128C00286154 /* FacturaCell.swift */,
+				21FC8CDB1D11F5470087AFC0 /* EmpresaViewController.swift */,
 			);
 			path = "e-xpenses_ios";
 			sourceTree = "<group>";
@@ -118,6 +126,7 @@
 			children = (
 				21D82FB71CD7BAC800ABB63E /* Seccion.swift */,
 				21CD950F1D06400900670AB9 /* NodoXml.swift */,
+				210E5A761D0F150800286154 /* Factura.swift */,
 			);
 			name = structs;
 			sourceTree = "<group>";
@@ -204,16 +213,19 @@
 			files = (
 				2149AAF01CD33F6900E15161 /* ViewController.swift in Sources */,
 				21D82FB81CD7BAC800ABB63E /* Seccion.swift in Sources */,
+				21E9211B1D0CA1420059604D /* FacturaVC.swift in Sources */,
 				21D82FBD1CD7C28A00ABB63E /* Anticipo.swift in Sources */,
+				210E5A771D0F150800286154 /* Factura.swift in Sources */,
+				21FC8CDC1D11F5470087AFC0 /* EmpresaViewController.swift in Sources */,
 				2149AAF61CD33F6900E15161 /* e_xpenses_ios.xcdatamodeld in Sources */,
 				21CD95101D06400900670AB9 /* NodoXml.swift in Sources */,
 				2149AAEE1CD33F6900E15161 /* AppDelegate.swift in Sources */,
 				2149AB091CD3DB4700E15161 /* TableViewController.swift in Sources */,
 				2149AB0D1CD3FD4C00E15161 /* AnticiposCell.swift in Sources */,
+				210E5A751D0F128C00286154 /* FacturaCell.swift in Sources */,
 				21D82FB61CD7B10D00ABB63E /* AnticipoDetalleVC.swift in Sources */,
 				2149AB071CD3D8C100E15161 /* SWRevealViewController.m in Sources */,
 				212AD72B1CD67A5E005C7605 /* MenuLateralVC.swift in Sources */,
-				217C1D3E1D06BB9500721E5A /* FacturaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

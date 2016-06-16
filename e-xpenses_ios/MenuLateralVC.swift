@@ -8,13 +8,16 @@
 
 import UIKit
 
-class MenuLateralVC: UIViewController,UITableViewDataSource {
+class MenuLateralVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet weak var header: UIView!
     var secciones:[Seccion] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         let azulDark = UIColor.init(red: 20/255, green: 77/255, blue: 104/255, alpha: 1)
         let azulMedio = UIColor.init(red: 39/255, green: 101/255, blue: 129/255, alpha: 1)
         let azulClaro = UIColor.init(red: 109/255, green: 173/255, blue: 202/255, alpha: 1)
@@ -64,6 +67,44 @@ class MenuLateralVC: UIViewController,UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return secciones[section].nombre
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 && indexPath.row == 0{
+            
+            
+            let refreshAlert = UIAlertController(title: "Alerta", message: "¿Seguro que desea cerrar sesion?", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+                
+                
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                print("Handle Ok logic here")
+                
+                
+                
+                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "user")
+                NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "pass")
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("Root") as! ViewController
+                self.presentViewController(nextViewController, animated:true, completion:nil)
+                
+                
+                
+            }))
+
+            
+            //mostrar alerta
+            presentViewController(refreshAlert, animated: true, completion: nil)
+            
+            
+        }
     }
     
 

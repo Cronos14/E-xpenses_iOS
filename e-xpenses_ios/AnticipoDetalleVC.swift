@@ -7,18 +7,17 @@
 //
 
 import UIKit
-import AVFoundation
 
-class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
+class AnticipoDetalleVC: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
-    var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
-    
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelFecha: UILabel!
     @IBOutlet weak var labelHora: UILabel!
     internal var nombre : String?
     var anticipo:Anticipo?
+    
+    @IBOutlet weak var imagen: UIImageView!
+    
     
     
     override func viewDidLoad() {
@@ -30,54 +29,30 @@ class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate
             labelFecha.text = fecha
             labelHora.text = hora
         }
-        
-        //iniciar lector QR
-        initLectorQr();
-        
-        
     }
     
-    func initLectorQr(){
-        view.backgroundColor = UIColor.blackColor()
-        captureSession = AVCaptureSession()
+    
+    @IBAction func tomarFoto(sender: AnyObject) {
         
-        let videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        let videoInput: AVCaptureDeviceInput
-        
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
-        
-        if (captureSession.canAddInput(videoInput)) {
-            captureSession.addInput(videoInput)
-        } else {
-            failed();
-            return;
-        }
-        
-        let metadataOutput = AVCaptureMetadataOutput()
-        
-        if (captureSession.canAddOutput(metadataOutput)) {
-            captureSession.addOutput(metadataOutput)
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
             
-            metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+            let imagePc = UIImagePickerController()
+            imagePc.delegate = self
+            imagePc.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePc.allowsEditing = false
+            
+            self.presentViewController(imagePc,animated:true,completion:nil)
+            
+            
         } else {
-            failed()
-            return
+            
+            print("no hay camara")
+            
         }
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession);
-        previewLayer.frame = view.layer.bounds;
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        view.layer.addSublayer(previewLayer);
-        
-        captureSession.startRunning();
 
     }
-
+    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,58 +69,6 @@ class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate
     }
     */
     
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
-        captureSession = nil
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (captureSession?.running == false) {
-            captureSession.startRunning();
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (captureSession?.running == true) {
-            captureSession.stopRunning();
-        }
-    }
-    
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        captureSession.stopRunning()
-        
-        if let metadataObject = metadataObjects.first {
-            let readableObject = metadataObject as! AVMetadataMachineReadableCodeObject;
-            
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            foundCode(readableObject.stringValue);
-        }
-        
-       // dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func foundCode(code: String) {
-        print(code)
-        
-        let refreshAlert = UIAlertController(title: "Mensaje", message: "QR: \(code)", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-            print("Handle Ok logic here")
-        }))
-        
-        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-            print("Handle Cancel Logic here")
-        }))
-        
-        //mostrar alerta
-        presentViewController(refreshAlert, animated: true, completion: nil)
-    }
     
     override func prefersStatusBarHidden() -> Bool {
         return false
@@ -153,6 +76,61 @@ class AnticipoDetalleVC: UIViewController,AVCaptureMetadataOutputObjectsDelegate
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .Portrait
+    }
+    
+    //MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        print("Foto elegida")
+        
+        //let base64 = convertImageToBase64(image)
+        //print("base64: \(base64.characters.count)")
+        
+        //redimencionar imagen
+        let imageNew = resizeImage(image,newWidth:200)
+        let base64New = convertImageToBase64(imageNew)
+        print("width \(image.size.width) height \(image.size.height)")
+        print("widthNew \(imageNew.size.width) heightNew \(imageNew.size.height)")
+        print("base64New: \(base64New.characters.count)")
+        
+        
+        imagen.image = convertBase64ToImage(base64New)
+        
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    func convertImageToBase64(image: UIImage) -> String {
+        
+        let imageData:NSData = UIImagePNGRepresentation(image)!
+        let base64String = imageData.base64EncodedStringWithOptions([])//.Encoding64CharacterLineLength
+        
+        return base64String
+        
+    }
+    
+    func convertBase64ToImage(base64String: String) -> UIImage {
+        
+        let decodedData:NSData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+        
+        //let decodedData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions(rawValue: 0))
+        
+        let decodedimage = UIImage(data: decodedData)
+        
+        return decodedimage!
+        
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 
 }

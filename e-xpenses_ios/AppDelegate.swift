@@ -164,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, NSXMLParserDelegate{
         
         //cambiar de UIViewController
         let mainStoryboardIpad : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewControlleripad : FacturaViewController = mainStoryboardIpad.instantiateViewControllerWithIdentifier("factura") as! FacturaViewController
+        let initialViewControlleripad : FacturaVC = mainStoryboardIpad.instantiateViewControllerWithIdentifier("facturaNueva") as! FacturaVC
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         initialViewControlleripad.nodos = nodos
         initialViewControlleripad.facturaCompleta = facturaCompleta as! String
